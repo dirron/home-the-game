@@ -79,12 +79,10 @@ public class MainCamera : MonoBehaviour {
 
             if (distToEndY > camH / 2)
             {
-                Debug.Log("First");
                 y = player.transform.position.y + cameraOffset.y;
             }
             else
             {
-                Debug.Log("Second");
                 y = Mathf.Min(transform.position.y, topCamBoundary - camH / 2);
             }
 
