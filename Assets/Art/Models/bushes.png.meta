@@ -90,10 +90,10 @@ TextureImporter:
       name: bushes_0
       rect:
         serializedVersion: 2
-        x: 18
-        y: 22
-        width: 123
-        height: 90
+        x: 100
+        y: 171
+        width: 169
+        height: 102
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -110,10 +110,10 @@ TextureImporter:
       name: bushes_1
       rect:
         serializedVersion: 2
-        x: 155
-        y: 21
-        width: 131
-        height: 88
+        x: 86
+        y: 45
+        width: 182
+        height: 103
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
