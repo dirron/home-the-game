@@ -132,7 +132,7 @@ public class LevelCreator : MonoBehaviour {
     {
         SpriteRenderer treeSprite = levelExitPrefab.GetComponentInChildren<SpriteRenderer>();
         float scaleMultiplier = (1 / generatedTilemap.transform.localScale.x);
-        float yOffset = treeSprite.bounds.size.y / 2;
+        float yOffset = treeSprite.bounds.size.y / 2 - treeSprite.bounds.size.y / 100; // subtract to avoid pixel line between sprite and ground
         float xOffset = treeSprite.bounds.size.x / 2;
 
         int xSpawnLocation = (int) (Mathf.Round(map.GetUpperBound(0) / scaleMultiplier) - xOffset);
