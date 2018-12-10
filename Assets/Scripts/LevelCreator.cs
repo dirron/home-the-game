@@ -158,7 +158,6 @@ public class LevelCreator : MonoBehaviour {
         {
             int itemIndex = UnityEngine.Random.Range(0, environment.Length);
             GameObject item = environment[itemIndex];
-            SpriteRenderer renderer = item.GetComponent<SpriteRenderer>();
             hit = Physics2D.Raycast(new Vector2(x, transform.position.y), Vector2.down);
 
             if (hit.collider != null)
