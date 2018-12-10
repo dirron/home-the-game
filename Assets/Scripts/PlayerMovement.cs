@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : MonoBehaviour
+{
 
     public float walkSpeed;
 
@@ -12,20 +13,48 @@ public class PlayerMovement : MonoBehaviour {
 
     private int jumpCount;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
 
         rb.freezeRotation = true;
 
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
 
-		if (Input.GetKey(KeyCode.D))
+    // Update is called once per frame
+    void Update()
+    {
+        Jump(); // put jump here to avoid input getting missed
+    }
+
+    void FixedUpdate()
+    {
+        Move();
+
+        animator.SetFloat("VelocityY", rb.velocity.y);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag.Equals("Ground") && animator != null)
+        {
+            animator.SetBool("IsOnGround", true);
+            jumpCount = 0;
+        }
+        if (collision.gameObject.tag.Equals("SpiderEnemy")
+            && collision.collider.GetType() == typeof(CapsuleCollider2D))
+        {
+            SpiderEnemy spiderEnemy = collision.gameObject.GetComponent<SpiderEnemy>();
+            spiderEnemy.Die();
+        }
+    }
+
+    void Move()
+    {
+        if (Input.GetKey(KeyCode.D))
         {
             animator.SetBool("IsMoving", true);
             transform.Translate(Vector2.right * Time.deltaTime * walkSpeed);
@@ -41,31 +70,19 @@ public class PlayerMovement : MonoBehaviour {
         {
             animator.SetBool("IsMoving", false);
         }
+    }
 
+    void Jump()
+    {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (jumpCount < 2) {
+            if (jumpCount < 2)
+            {
                 animator.SetBool("IsOnGround", false);
                 jumpCount++;
                 rb.velocity = new Vector2(rb.velocity.x, 0);
                 rb.AddForce(Vector2.up * 8f, ForceMode2D.Impulse);
             }
-        }
-
-        animator.SetFloat("VelocityY", rb.velocity.y);
-    }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag.Equals("Ground") && animator != null)
-        {
-            animator.SetBool("IsOnGround", true);
-            jumpCount = 0;
-        }
-        if (collision.gameObject.tag.Equals("SpiderEnemy") 
-            && collision.collider.GetType() == typeof(CapsuleCollider2D)) {
-            SpiderEnemy spiderEnemy = collision.gameObject.GetComponent<SpiderEnemy>();
-            spiderEnemy.Die();
         }
     }
 }
