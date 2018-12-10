@@ -8,8 +8,7 @@ using UnityEngine.Tilemaps;
 public class LevelCreator : MonoBehaviour {
 
     public GameObject levelExitPrefab;
-    public GameObject enemyToSpawn; // not player
-    public GameObject entityContainer;
+    public GameObject environmentContainer;
     public GameObject[] environment;
 
     public int width;
@@ -164,7 +163,7 @@ public class LevelCreator : MonoBehaviour {
             {
                 GameObject environmentObject = Instantiate(environment[itemIndex], 
                     new Vector3(hit.point.x, hit.point.y), Quaternion.identity);
-                environmentObject.transform.SetParent(entityContainer.transform);
+                environmentObject.transform.SetParent(environmentContainer.transform);
             }
         }
 

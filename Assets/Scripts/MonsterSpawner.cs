@@ -4,16 +4,84 @@ using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour {
 
-    public GameObject player;
     public GameObject[] monsters;
+    public GameObject entityContainer;
+    public GameObject playerSpawnPoint;
+
+    private GameObject player;
+
+    private float camH;
+    private float camW;
+    private bool isActive = false;
 
 	// Use this for initialization
 	void Start () {
-		
+        camH = Camera.main.orthographicSize * 2f;
+        camW = camH * Camera.main.aspect;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        if (player != null
+            && player.transform.position.x > playerSpawnPoint.transform.position.x + camW / 2
+            && !isActive)
+        {
+            Debug.Log("MonsterSpawner is active!");
+            isActive = true;
+            Invoke("Spawn", 3f);
+        }
+    }
+
+    void Spawn()
+    {
+        bool isFromLeft = Random.Range(0, 10) < 3; // bias towards right
+        Debug.Log(isFromLeft);
+        Vector2 rayOrigin;
+        RaycastHit2D hit;
+        Vector3 offset = new Vector3(camW * 1.5f, camH, 0);
+        float offsetX = camW / 1.5f;
+        float offsetY = camH / 1.5f;
+        int direction;
+
+        if (isFromLeft)
+        {
+            rayOrigin = player.transform.position + new Vector3(-camW, camH);
+            direction = SpiderEnemy.RIGHT;
+        }
+        else
+        {
+            rayOrigin = player.transform.position + new Vector3(camW, camH);
+            direction = SpiderEnemy.LEFT;
+        }
+       
+        hit = Physics2D.Raycast(rayOrigin, Vector2.down);
+
+        if (hit.collider != null)
+        {
+            GameObject jumpingSpider = Instantiate(monsters[0], hit.point, Quaternion.identity);
+            jumpingSpider.transform.SetParent(entityContainer.transform);
+            jumpingSpider.GetComponent<SpiderEnemy>().SetDirection(direction);
+        }
+
+        // limit number of enemies at once
+        if (entityContainer.transform.childCount < 30)
+        {
+            Invoke("Spawn", Random.Range(3f, 6f));
+        }
+    }
+
+    void OnPlayerSpawned()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    void OnEnable()
+    {
+        LevelEventManager.StartListening("PlayerSpawned", OnPlayerSpawned);
+    }
+
+    void OnDisable()
+    {
+        LevelEventManager.StartListening("PlayerSpawned", OnPlayerSpawned);
+    }
 }

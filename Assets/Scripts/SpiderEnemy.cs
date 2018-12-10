@@ -16,6 +16,9 @@ public class SpiderEnemy : MonoBehaviour {
 
     private bool awake = false;
 
+    public const int LEFT = -1;
+    public const int RIGHT = 1;
+
 	// Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody2D>();
@@ -27,7 +30,7 @@ public class SpiderEnemy : MonoBehaviour {
         // move once awake
         if (awake)
         {
-            if (directionX == -1)
+            if (directionX == LEFT)
             {
                 transform.Translate(Vector2.left * Time.deltaTime * moveSpeed);
             }
@@ -63,15 +66,27 @@ public class SpiderEnemy : MonoBehaviour {
         }
     }
 
-    public void ChangeDirection()
+    public void SetDirection(int direction)
     {
-        if (directionX == -1)
+        if (direction != SpiderEnemy.LEFT && direction != SpiderEnemy.RIGHT)
         {
-            directionX = 1;
+            Debug.LogError("Invalid direction specified!");
         }
         else
         {
-            directionX = -1;
+            directionX = direction;
+        }
+    }
+
+    public void ChangeDirection()
+    {
+        if (directionX == LEFT)
+        {
+            directionX = RIGHT;
+        }
+        else
+        {
+            directionX = LEFT;
         }
     }
 
