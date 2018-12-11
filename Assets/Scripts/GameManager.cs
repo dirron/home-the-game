@@ -28,8 +28,6 @@ public class GameManager : MonoBehaviour {
         entityContainerScript = entityContainer.GetComponent<EntityContainer>();
 
         LevelEventManager.TriggerEvent("PlayerSpawned");
-
-
 	}
 	
 	// Update is called once per frame

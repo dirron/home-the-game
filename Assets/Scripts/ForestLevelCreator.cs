@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Tilemaps;
 
-public class LevelCreator : MonoBehaviour {
+public class ForestLevelCreator : MonoBehaviour {
 
     public GameObject levelExitPrefab;
     public GameObject environmentContainer;
@@ -15,7 +15,6 @@ public class LevelCreator : MonoBehaviour {
     public int height;
 
     public TileBase[] tiles;
-    public TileBase baseTile;
 
     public Tilemap generatedTilemap;
     public Tilemap boundaryTilemap;
