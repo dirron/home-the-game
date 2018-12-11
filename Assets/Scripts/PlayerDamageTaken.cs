@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class PlayerDamageTaken : MonoBehaviour {
 
-    private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
 
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
 	}
 	
 	// Update is called once per frame

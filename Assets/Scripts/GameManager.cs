@@ -72,7 +72,6 @@ public class GameManager : MonoBehaviour {
         Physics2D.IgnoreLayerCollision(9, 10, true); // ignore between player and mob
         Debug.Log("Player is temporarily invulnerable");
 
-        float[] alphaValues = { 0.1f, 0.5f };
         Color normal = spriteRenderer.color;
 
         float endTime = Time.time + 2f;
