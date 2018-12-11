@@ -568,7 +568,7 @@ MonoBehaviour:
   - {fileID: 1754386107}
   - {fileID: 1527792858}
   - {fileID: 1664995990}
-  invulnerabilityTime: 3
+  invulnerabilityTime: 2
 --- !u!4 &354134366
 Transform:
   m_ObjectHideFlags: 0
