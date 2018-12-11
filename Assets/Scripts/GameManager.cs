@@ -10,10 +10,12 @@ public class GameManager : MonoBehaviour {
     public GameObject spawnPoint;
     public GameObject entityContainer;
     public GameObject[] hitPointObjects;
+    public float invulnerabilityTime;
 
     private GameObject player;
     private EntityContainer entityContainerScript;
     private int hitPoints;
+    private bool isHittable = true;
 
 	// Use this for initialization
 	void Start () {
@@ -37,6 +39,15 @@ public class GameManager : MonoBehaviour {
 
     void DamagePlayer()
     {
+        if (!isHittable)
+        {
+            return;
+        }
+        else
+        {
+            isHittable = false;
+        }
+
         Image heart = hitPointObjects[hitPoints - 1].GetComponent<Image>();
         Color faded = heart.color;
         faded.a = 0.5f;
@@ -74,7 +85,7 @@ public class GameManager : MonoBehaviour {
 
         Color normal = spriteRenderer.color;
 
-        float endTime = Time.time + 2f;
+        float endTime = Time.time + invulnerabilityTime;
         float prevAlpha = normal.a;
         while (Time.time < endTime)
         {
@@ -88,6 +99,7 @@ public class GameManager : MonoBehaviour {
 
         spriteRenderer.color = normal;
         Physics2D.IgnoreLayerCollision(9, 10, false);
+        isHittable = true;
         Debug.Log("Player is vulnerable again");
     }
 }

@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4342649069954606}
   - component: {fileID: 212984267239148122}
   - component: {fileID: 70963952168469050}
+  - component: {fileID: 114484542173581538}
   m_Layer: 0
   m_Name: Bush1
   m_TagString: Hideable
@@ -56,6 +57,23 @@ CapsuleCollider2D:
   m_Offset: {x: 0.06423783, y: -0.049415365}
   m_Size: {x: 4.7377152, y: 2.7724435}
   m_Direction: 1
+--- !u!114 &114484542173581538
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1503164523989854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 478a62b8def321d48a596d9650baa292, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: 7a71f9fc7e0bc55469c36d943099e9ab, type: 3}
+  - {fileID: 21300002, guid: 7a71f9fc7e0bc55469c36d943099e9ab, type: 3}
+  highlighted:
+  - {fileID: 21300000, guid: 00fd56272a0ed2045a847337a0158ae2, type: 3}
+  - {fileID: 21300002, guid: 00fd56272a0ed2045a847337a0158ae2, type: 3}
 --- !u!212 &212984267239148122
 SpriteRenderer:
   m_ObjectHideFlags: 1
