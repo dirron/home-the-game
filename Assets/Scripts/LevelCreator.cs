@@ -139,11 +139,10 @@ public class LevelCreator : MonoBehaviour {
         RaycastHit2D hit = Physics2D.Raycast(new Vector2(xSpawnLocation, 100), Vector2.down);
         if (hit.collider != null)
         {
-            Debug.Log("Raycast hit! " + hit.point);
+            GameObject exit = Instantiate(levelExitPrefab, new Vector3(hit.point.x, hit.point.y + yOffset, 0), Quaternion.identity);
+            LevelEventManager.TriggerEvent("LevelExitCreated");
+            Debug.Log("Spawned exit at " + exit.transform.position);
         }
-        GameObject exit = Instantiate(levelExitPrefab, new Vector3(hit.point.x, hit.point.y + yOffset, 0), Quaternion.identity);
-        LevelEventManager.TriggerEvent("LevelExitCreated");
-        Debug.Log("Spawned exit at " + exit.transform.position);
 
         yield return null;
     }
@@ -156,7 +155,6 @@ public class LevelCreator : MonoBehaviour {
         for (int x = 0; x < endX; x += UnityEngine.Random.Range(5, 20))
         {
             int itemIndex = UnityEngine.Random.Range(0, environment.Length);
-            GameObject item = environment[itemIndex];
             hit = Physics2D.Raycast(new Vector2(x, transform.position.y), Vector2.down);
 
             if (hit.collider != null)

@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 61997347076270164}
   - component: {fileID: 114350982065354686}
   - component: {fileID: 70549220030278478}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SpiderEnemy
   m_TagString: SpiderEnemy
   m_Icon: {fileID: 0}

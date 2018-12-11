@@ -15,12 +15,7 @@ public class LevelEventManager : MonoBehaviour {
             if (!levelEventManager)
             {
                 levelEventManager = FindObjectOfType(typeof(LevelEventManager)) as LevelEventManager;
-
-                if (!levelEventManager)
-                {
-                    Debug.LogError("There must be an active LevelEventManager script on a GameObject");
-                }
-                else
+                if (levelEventManager != null)
                 {
                     levelEventManager.init();
                 }
@@ -41,6 +36,11 @@ public class LevelEventManager : MonoBehaviour {
     public static void StartListening(string eventName, Action listener)
     {
         Action thisEvent;
+
+        if (instance == null || instance.eventDictionary == null)
+        {
+            return;
+        }
 
         if (instance.eventDictionary.TryGetValue(eventName, out thisEvent))
         {

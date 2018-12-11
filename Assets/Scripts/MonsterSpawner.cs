@@ -35,12 +35,8 @@ public class MonsterSpawner : MonoBehaviour {
     void Spawn()
     {
         bool isFromLeft = Random.Range(0, 10) < 3; // bias towards right
-        Debug.Log(isFromLeft);
         Vector2 rayOrigin;
         RaycastHit2D hit;
-        Vector3 offset = new Vector3(camW * 1.5f, camH, 0);
-        float offsetX = camW / 1.5f;
-        float offsetY = camH / 1.5f;
         int direction;
 
         if (isFromLeft)

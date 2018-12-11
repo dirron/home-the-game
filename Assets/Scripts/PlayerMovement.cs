@@ -20,8 +20,7 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
 
-        rb.freezeRotation = true;
-
+        rb.freezeRotation = true;        
     }
 
     // Update is called once per frame
@@ -39,16 +38,11 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag.Equals("Ground") && animator != null)
+        GameObject other = collision.gameObject;
+        if (other.tag.Equals("Ground") && animator != null)
         {
             animator.SetBool("IsOnGround", true);
             jumpCount = 0;
-        }
-        if (collision.gameObject.tag.Equals("SpiderEnemy")
-            && collision.collider.GetType() == typeof(CapsuleCollider2D))
-        {
-            SpiderEnemy spiderEnemy = collision.gameObject.GetComponent<SpiderEnemy>();
-            spiderEnemy.Die();
         }
     }
 
@@ -85,4 +79,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
+    
 }
