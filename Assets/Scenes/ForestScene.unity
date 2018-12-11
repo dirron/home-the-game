@@ -564,7 +564,10 @@ MonoBehaviour:
     type: 2}
   spawnPoint: {fileID: 1891183031}
   entityContainer: {fileID: 1925570282}
-  hitPointObjects: []
+  hitPointObjects:
+  - {fileID: 1754386107}
+  - {fileID: 1527792858}
+  - {fileID: 1664995990}
 --- !u!4 &354134366
 Transform:
   m_ObjectHideFlags: 0
