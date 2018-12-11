@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - SpiderEnemy
   - MonsterSpawnPoint
+  - Hideable
   layers:
   - Default
   - TransparentFX

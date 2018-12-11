@@ -441,7 +441,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f131125532ae7e643a46c5927755c71d, type: 2}
   - {fileID: 11400000, guid: 84b7a65c53241a6499e29561a25c9d1c, type: 2}
   - {fileID: 11400000, guid: 346d5ee4de296cd44aafd4fc512ba38d, type: 2}
-  baseTile: {fileID: 11400000, guid: 514e57d6a2de7d34b9aeded1a5041d8a, type: 2}
+  baseTile: {fileID: 0}
   generatedTilemap: {fileID: 1573030175}
   boundaryTilemap: {fileID: 1328835992}
   minDistanceToLastSpawn: 5

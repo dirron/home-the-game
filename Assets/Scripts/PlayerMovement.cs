@@ -64,6 +64,8 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("IsMoving", false);
         }
+
+        
     }
 
     void Jump()
@@ -79,6 +81,4 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-
-    
 }
