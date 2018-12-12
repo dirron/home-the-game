@@ -671,6 +671,11 @@ Prefab:
       propertyPath: backgroundSprite
       value: 
       objectReference: {fileID: 620001778}
+    - target: {fileID: 114254922255811028, guid: 81a9ed85e4fa2fe4dbd49578415c4574,
+        type: 2}
+      propertyPath: verticalOffset
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81a9ed85e4fa2fe4dbd49578415c4574, type: 2}
   m_IsPrefabAsset: 0

@@ -10,6 +10,8 @@ TagManager:
   - SpiderEnemy
   - MonsterSpawnPoint
   - Hideable
+  - KillTrigger
+  - Projectile
   layers:
   - Default
   - TransparentFX
@@ -22,7 +24,7 @@ TagManager:
   - PostProcessing
   - Player
   - Mob
-  - 
+  - EnemyProjectile
   - 
   - 
   - 

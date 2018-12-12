@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpiderEnemy : MonoBehaviour {
+public class SpiderEnemy : MonoBehaviour, Enemy {
 
     public int directionX = -1;
 
@@ -40,10 +40,6 @@ public class SpiderEnemy : MonoBehaviour {
             }
         }
 	}
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-    }
 
     public void Die()
     {

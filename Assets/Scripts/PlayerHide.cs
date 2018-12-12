@@ -33,7 +33,7 @@ public class PlayerHide : MonoBehaviour {
         }
     }
 
-    void OnTriggerEnter2D(Collider2D col)
+    void OnTriggerStay2D(Collider2D col)
     {
         GameObject other = col.gameObject;
 

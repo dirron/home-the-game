@@ -44,6 +44,10 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("IsOnGround", true);
             jumpCount = 0;
         }
+        else if (other.tag == "Enemy")
+        {
+            LevelEventManager.TriggerEvent("PlayerDamageTaken");
+        }
     }
 
     void Move()
@@ -63,9 +67,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             animator.SetBool("IsMoving", false);
-        }
-
-        
+        }   
     }
 
     void Jump()
