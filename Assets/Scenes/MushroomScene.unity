@@ -364,10 +364,14 @@ MonoBehaviour:
   tilemap: {fileID: 1551804602}
   tiles:
   - {fileID: 11400000, guid: 77c02c1cd948ef84b8c08ab7c3bfb687, type: 2}
-  environmentObjects:
-  - {fileID: 1171989090735138, guid: 8964088c5aed745489a03de656397544, type: 2}
+  treeObjects:
+  - {fileID: 1600009063859956, guid: f0dea62b940252c49b879b80016b05fd, type: 2}
+  - {fileID: 1828523252882862, guid: d995e10ec13c34141adc2e261068fd77, type: 2}
+  - {fileID: 1007534508162286, guid: 67dd211350bafe6449c0d98b06def5dd, type: 2}
+  treePlatformObjects:
   - {fileID: 1564391344407518, guid: faec58bcc767c1048801349d7765ec7a, type: 2}
-  - {fileID: 1812436321753148, guid: 6d32e410e3b2f7d438df3f98c80d1639, type: 2}
+  movingMushroomObject: {fileID: 1812436321753148, guid: 6d32e410e3b2f7d438df3f98c80d1639,
+    type: 2}
   width: 300
   height: 30
   environmentContainer: {fileID: 1668856031}
