@@ -7,7 +7,9 @@ public class MushroomLevelCreator : MonoBehaviour
 
     public Tilemap tilemap;
     public Tile[] tiles;
-    public GameObject[] environmentObjects;
+    public GameObject[] treeObjects;
+    public GameObject[] treePlatformObjects;
+    public GameObject movingMushroomObject;
     public int width;
     public int height;
     public GameObject environmentContainer;
@@ -34,7 +36,7 @@ public class MushroomLevelCreator : MonoBehaviour
     IEnumerator GenerateTrees()
     {
 
-        SpriteRenderer treeRenderer = environmentObjects[0].GetComponent<SpriteRenderer>();
+        SpriteRenderer treeRenderer = treeObjects[0].GetComponent<SpriteRenderer>();
         float treeHeight = treeRenderer.bounds.size.y;
 
         float platformStagger = 0f;
@@ -54,8 +56,10 @@ public class MushroomLevelCreator : MonoBehaviour
 
                 float randomY = Random.Range(-treeHeight / 4, treeHeight / 4);
 
-                GameObject movingMushroom = Instantiate(environmentObjects[2],
-                    new Vector3(x - treeSpacing / scaleMultiplier, randomY, 0), Quaternion.identity);
+                GameObject movingMushroom = 
+                    Instantiate(movingMushroomObject,
+                    new Vector3(x - treeSpacing / scaleMultiplier, randomY, 0), 
+                    Quaternion.identity);
                 movingMushroom.transform.SetParent(environmentContainer.transform);
 
                 lastObjectGenerated = movingMushroom;
@@ -65,7 +69,10 @@ public class MushroomLevelCreator : MonoBehaviour
                 consecutiveTreeCounter++;
 
                 // generate tree trunk
-                GameObject tree = Instantiate(environmentObjects[0], new Vector3(x, 0, 0), Quaternion.identity);
+                GameObject tree = 
+                    Instantiate(treeObjects[Random.Range(0, treeObjects.Length)],
+                    new Vector3(x, 0, 0), 
+                    Quaternion.identity);
                 tree.transform.SetParent(environmentContainer.transform);
 
                 float treeCenterY = tree.transform.position.y;
@@ -81,7 +88,10 @@ public class MushroomLevelCreator : MonoBehaviour
                     y = y + step + randomOffsetY)
                 {
                     float offsetX = Random.Range(-1f, 1f); // give some variation to the mushroom platform placement along x-axis
-                    GameObject mushroomPlatform = Instantiate(environmentObjects[1], new Vector3(x + offsetX, y, 0), Quaternion.identity);
+                    GameObject mushroomPlatform = 
+                        Instantiate(treePlatformObjects[Random.Range(0, treePlatformObjects.Length)],
+                        new Vector3(x + offsetX, y, 0),
+                        Quaternion.identity);
                     mushroomPlatform.transform.SetParent(environmentContainer.transform);
                 }
 
