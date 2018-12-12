@@ -64,11 +64,15 @@ public class WaspEnemy : MonoBehaviour, Enemy {
     {
         if ((transform.position.x - playerPosition.x) < 0)
         {
-            spriteRenderer.flipX = true;
+            Vector3 flipX = transform.localScale;
+            flipX.x = -1;
+            transform.localScale = flipX;
         }
         else
         {
-            spriteRenderer.flipX = false;
+            Vector3 flipX = transform.localScale;
+            flipX.x = 1;
+            transform.localScale = flipX;
         }
     }
 
