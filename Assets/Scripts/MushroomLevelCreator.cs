@@ -14,6 +14,7 @@ public class MushroomLevelCreator : MonoBehaviour
     public GameObject exit;
 
     private float scaleMultiplier;
+    private GameObject lastObjectGenerated;
 
     // Use this for initialization
     void Start()
@@ -56,6 +57,8 @@ public class MushroomLevelCreator : MonoBehaviour
                 GameObject movingMushroom = Instantiate(environmentObjects[2],
                     new Vector3(x - treeSpacing / scaleMultiplier, randomY, 0), Quaternion.identity);
                 movingMushroom.transform.SetParent(environmentContainer.transform);
+
+                lastObjectGenerated = movingMushroom;
             }
             else
             {
@@ -81,6 +84,8 @@ public class MushroomLevelCreator : MonoBehaviour
                     GameObject mushroomPlatform = Instantiate(environmentObjects[1], new Vector3(x + offsetX, y, 0), Quaternion.identity);
                     mushroomPlatform.transform.SetParent(environmentContainer.transform);
                 }
+
+                lastObjectGenerated = tree;
             }
         }
 
@@ -91,8 +96,8 @@ public class MushroomLevelCreator : MonoBehaviour
 
     IEnumerator GenerateExit()
     {
-        float offset = 2f;
-        Instantiate(exit, new Vector3(width / scaleMultiplier + offset, 0, 0), Quaternion.identity);
+        Vector3 offset = new Vector3(3f, 0, 0);
+        Instantiate(exit, lastObjectGenerated.transform.position + offset, Quaternion.identity);
 
         Debug.Log("Generated exit");
         LevelEventManager.TriggerEvent("LevelExitCreated");

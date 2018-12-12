@@ -11,14 +11,13 @@ public class WaspEnemy : MonoBehaviour, Enemy {
     private bool awake = false;
     private Vector3 playerPosition;
     private SpriteRenderer spriteRenderer;
-    private bool shootingMode;
-    private bool shouldShoot = true;
+    private bool shouldShoot;
     private float distanceToPlayer;
 
 	// Use this for initialization
 	void Start () {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        shootingMode = Random.Range(0, 2) == 0;
+        shouldShoot = Random.Range(0, 2) == 0;
 	}
 	
 	// Update is called once per frame
@@ -29,10 +28,14 @@ public class WaspEnemy : MonoBehaviour, Enemy {
 
             distanceToPlayer = Vector3.Distance(transform.position, playerPosition);
 
-            if (distanceToPlayer > 10 || !shouldShoot)
+            if (!shouldShoot)
             {
                 MoveTowardsPlayer();
-            } 
+            }
+            else if (shouldShoot && distanceToPlayer > 10)
+            {
+                MoveTowardsPlayer();
+            }
         }
 	}
 
