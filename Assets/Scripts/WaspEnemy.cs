@@ -74,9 +74,17 @@ public class WaspEnemy : MonoBehaviour, Enemy {
 
     void MoveTowardsPlayer()
     {
+        float speedBoost = 2f;
         Vector3 direction = Vector3.Normalize(playerPosition - transform.position);
 
-        transform.Translate(direction * Time.deltaTime * speed);
+        if (distanceToPlayer > 15)
+        {
+            transform.Translate(direction * Time.deltaTime * speed * speedBoost);
+        }
+        else
+        {
+            transform.Translate(direction * Time.deltaTime * speed);
+        }
     }
 
     void Shoot()

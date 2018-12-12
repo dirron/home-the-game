@@ -7,7 +7,6 @@ TagManager:
   - Ground
   - LevelExit
   - Enemy
-  - SpiderEnemy
   - MonsterSpawnPoint
   - Hideable
   - KillTrigger
