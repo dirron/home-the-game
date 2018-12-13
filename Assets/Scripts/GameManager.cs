@@ -239,18 +239,21 @@ public class GameManager : MonoBehaviour {
     {
         transitionTitle.text = "Level Complete";
         transitionScreen.SetActive(true);
-        Time.timeScale = 0;
+
         yield return new WaitForSeconds(2f);
-        Time.timeScale = 1;
 
         int index = SceneManager.GetActiveScene().buildIndex;
+
+        Debug.Log(index + " " + SceneManager.GetActiveScene().buildIndex);
         if (index < SceneManager.sceneCountInBuildSettings - 1)
         {
+            Debug.Log("Loading next scene");
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
         else
         {
             Debug.Log("Game complete");
         }
+        yield return null;
     }
 }

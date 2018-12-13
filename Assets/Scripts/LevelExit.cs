@@ -18,6 +18,7 @@ public class LevelExit : MonoBehaviour {
     {
         if (collider.gameObject.tag.Equals("Player"))
         {
+            Debug.Log("Level exit reached");
             LevelEventManager.TriggerEvent("LevelComplete");
         }
     }
