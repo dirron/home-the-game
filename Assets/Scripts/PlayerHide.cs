@@ -39,7 +39,6 @@ public class PlayerHide : MonoBehaviour {
 
         if (other.tag == "Hideable")
         {
-            Debug.Log("Entered hiding area");
             canHide = true;
         }
     }

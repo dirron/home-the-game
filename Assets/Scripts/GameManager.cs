@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour {
     // UI stuff //
     public GameObject[] hitPointObjects;
     // menu
+    public string levelName;
     public GameObject menu;
     public Text titleText;
     public int enemiesKilled = 0;
@@ -62,9 +63,9 @@ public class GameManager : MonoBehaviour {
         {
             if (!menu.activeSelf)
             {
-                OpenMenu("PAUSED");
+                OpenMenu(levelName + " (Paused)");
             }
-            else if (menu.activeSelf && titleText.text == "PAUSED")
+            else if (menu.activeSelf && titleText.text.Contains("Paused"))
             {
                 CloseMenu();
             }
@@ -219,7 +220,9 @@ public class GameManager : MonoBehaviour {
     {
         transitionTitle.text = "Level Complete";
         transitionScreen.SetActive(true);
+        Time.timeScale = 0;
         yield return new WaitForSeconds(2f);
+        Time.timeScale = 1;
 
         int index = SceneManager.GetActiveScene().buildIndex;
         if (index < SceneManager.sceneCountInBuildSettings - 1)
@@ -228,7 +231,7 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
-            // go to main menu
+            Debug.Log("Game complete");
         }
     }
 }
