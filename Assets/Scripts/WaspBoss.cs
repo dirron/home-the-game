@@ -129,9 +129,11 @@ public class WaspBoss : MonoBehaviour, IBossEnemy {
         hitPoints--;
         Debug.Log("Boss has been damaged");
 
-        StartCoroutine(Recover());
-
-        if (hitPoints <= 0)
+        if (hitPoints > 0)
+        {
+            StartCoroutine(Recover());
+        }
+        else if (hitPoints <= 0)
         {
             Die();
         }
@@ -147,6 +149,7 @@ public class WaspBoss : MonoBehaviour, IBossEnemy {
 
     IEnumerator Recover()
     {
+        Debug.Log("Paused attacks");
         StopCoroutine(attack);
 
         yield return StartCoroutine(SetVulnerable(false));
@@ -160,12 +163,29 @@ public class WaspBoss : MonoBehaviour, IBossEnemy {
         yield return StartCoroutine(TeleportExplosion());
 
         attack = StartCoroutine(AttackPattern());
+        Debug.Log("Restarted attack");
     }
 
     public void Die()
     {
+        StartCoroutine(DieRoutine());
+    }
+
+    public IEnumerator DieRoutine()
+    {
         Debug.Log("Boss has been slain");
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        rb.gravityScale = 1;
+
         StopCoroutine(attack);
+        StopAllCoroutines();
+
+        yield return new WaitForSeconds(2f);
+
+        LevelEventManager.TriggerEvent("LevelComplete");
+
+        yield return null;
     }
 
     void OnCollisionEnter2D(Collision2D col)

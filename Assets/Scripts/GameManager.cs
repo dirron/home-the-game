@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour {
     public GameObject playerPrefab;
     public GameObject spawnPoint;
     public GameObject entityContainer;
-    public GameObject[] hitPointObjects;
     public float invulnerabilityTime;
 
     private GameObject player;
@@ -18,12 +17,27 @@ public class GameManager : MonoBehaviour {
     private int hitPoints;
     private bool isHittable = true;
 
+    // item pickup stuff
     private Item item;
     private int itemCharges;
     private bool itemIgnoreCollisionOnMouse = false;
 
-	// Use this for initialization
-	void Start () {
+    // UI stuff //
+    public GameObject[] hitPointObjects;
+    // menu
+    public GameObject menu;
+    public Text titleText;
+    public int enemiesKilled = 0;
+    public Text enemiesKilledText;
+    public Text currentItemText;
+    public int totalItems = 0;
+    public Text totalItemsText;
+    // transition
+    public GameObject transitionScreen;
+    public Text transitionTitle;
+
+    // Use this for initialization
+    void Start () {
         player = Instantiate(playerPrefab, spawnPoint.transform.position, Quaternion.identity);
         player.transform.SetParent(entityContainer.transform);
 
@@ -42,6 +56,18 @@ public class GameManager : MonoBehaviour {
         if (Input.GetMouseButtonDown(1))
         {
             UseItem();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!menu.activeSelf)
+            {
+                OpenMenu("PAUSED");
+            }
+            else if (menu.activeSelf && titleText.text == "PAUSED")
+            {
+                CloseMenu();
+            }
         }
 	}
 
@@ -77,6 +103,13 @@ public class GameManager : MonoBehaviour {
     void KillPlayer()
     {
         Debug.Log("Player has died");
+        OpenMenu("You have died.");
+    }
+
+    public void RestartLevel()
+    {
+        Debug.Log("Restarting");
+        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -85,6 +118,9 @@ public class GameManager : MonoBehaviour {
         item = newItem;
         itemCharges = numCharges;
         itemIgnoreCollisionOnMouse = ignoreCollision;
+
+        totalItems++;
+        totalItemsText.text = "Total items found " + totalItems;
     }
 
     public void UseItem()
@@ -113,16 +149,26 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    void CountEnemyDeath()
+    {
+        enemiesKilled++;
+        enemiesKilledText.text = "Enemies killed: " + enemiesKilled;
+    }
+
     void OnEnable()
     {
         LevelEventManager.StartListening("PlayerDamageTaken", DamagePlayer);
         LevelEventManager.StartListening("PlayerInstantDeath", KillPlayer);
+        LevelEventManager.StartListening("EnemyKilled", CountEnemyDeath);
+        LevelEventManager.StartListening("LevelComplete", LoadNextLevel);
     }
 
     void OnDisable()
     {
         LevelEventManager.StopListening("PlayerDamageTaken", DamagePlayer);
         LevelEventManager.StopListening("PlayerInstantDeath", KillPlayer);
+        LevelEventManager.StopListening("EnemyKilled", CountEnemyDeath);
+        LevelEventManager.StopListening("LevelComplete", LoadNextLevel);
     }
 
     public IEnumerator GracePeriod()
@@ -149,5 +195,40 @@ public class GameManager : MonoBehaviour {
         Physics2D.IgnoreLayerCollision(9, 10, false);
         isHittable = true;
         Debug.Log("Player is vulnerable again");
+    }
+
+    void OpenMenu(string title = "Home")
+    {
+        titleText.text = title;
+        menu.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    void CloseMenu()
+    {
+        menu.SetActive(false);
+        Time.timeScale = 1;
+    }
+
+    void LoadNextLevel()
+    {
+        StartCoroutine(LoadNextLevelRoutine());
+    }
+
+    IEnumerator LoadNextLevelRoutine()
+    {
+        transitionTitle.text = "Level Complete";
+        transitionScreen.SetActive(true);
+        yield return new WaitForSeconds(2f);
+
+        int index = SceneManager.GetActiveScene().buildIndex;
+        if (index < SceneManager.sceneCountInBuildSettings - 1)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        else
+        {
+            // go to main menu
+        }
     }
 }
