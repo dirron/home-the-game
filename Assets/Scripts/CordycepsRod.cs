@@ -67,4 +67,9 @@ public class CordycepsRod : MonoBehaviour, Item {
             player = col.gameObject;
         }
     }
+
+    public string GetName()
+    {
+        return "Cordyceps Rod";
+    }
 }

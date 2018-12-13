@@ -5,4 +5,5 @@ using UnityEngine;
 public interface Item{
     void Use();
     void Destroy();
+    string GetName();
 }

@@ -122,6 +122,7 @@ public class GameManager : MonoBehaviour {
 
         totalItems++;
         totalItemsText.text = "Total items found " + totalItems;
+        currentItemText.text = "Current item: " + newItem.GetName();
     }
 
     public void UseItem()
@@ -144,6 +145,7 @@ public class GameManager : MonoBehaviour {
 
             if (itemCharges == 0)
             {
+                currentItemText.text = "Current item: n/a";
                 item.Destroy();
                 item = null;
             }
@@ -214,6 +216,11 @@ public class GameManager : MonoBehaviour {
     void LoadNextLevel()
     {
         StartCoroutine(LoadNextLevelRoutine());
+    }
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene(1);
     }
 
     IEnumerator LoadNextLevelRoutine()
