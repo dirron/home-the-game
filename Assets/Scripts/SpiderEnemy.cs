@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpiderEnemy : MonoBehaviour, Enemy {
 
     public int directionX = -1;
+    public GameObject ballPrefab;
 
     private Rigidbody2D rb;
 
@@ -21,8 +22,12 @@ public class SpiderEnemy : MonoBehaviour, Enemy {
 
     private Animator animator;
 
-	// Use this for initialization
-	void Start () {
+    private bool shouldshoot;
+
+    private GameObject player;
+
+    // Use this for initialization
+    void Start () {
         rb = GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;
         animator = GetComponent<Animator>();
@@ -42,6 +47,11 @@ public class SpiderEnemy : MonoBehaviour, Enemy {
                 transform.Translate(Vector2.right * Time.deltaTime * moveSpeed);
             }
         }
+
+        if (player == null && shouldshoot)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
 	}
 
     public void Die()
@@ -50,6 +60,29 @@ public class SpiderEnemy : MonoBehaviour, Enemy {
         Debug.Log("Spider has been murdered");
 
         LevelEventManager.TriggerEvent("EnemyKilled");
+    }
+
+    void Attack()
+    {
+        if (shouldshoot)
+        {
+            Shoot();
+        }
+        Invoke("Jump", 1f);
+        Invoke("Attack", 3f);
+    }
+
+    void Shoot()
+    {
+        if (player != null && Vector3.Distance(player.transform.position, transform.position) <= 10)
+        {
+            Vector3 direction = Vector3.Normalize(player.transform.position - transform.position);
+            GameObject ball = Instantiate(ballPrefab, transform.position, Quaternion.identity);
+
+            ball.GetComponent<Rigidbody2D>().AddForce(direction * 10f, ForceMode2D.Impulse);
+
+            Destroy(ball, 5f);
+        }
     }
 
     void Jump()
@@ -101,8 +134,9 @@ public class SpiderEnemy : MonoBehaviour, Enemy {
     {
         if (Vector3.Distance(transform.position, position) < 30 && !awake)
         {
+            shouldshoot = Random.Range(0, 2) == 0;
             awake = true;
-            InvokeRepeating("Jump", 2f, 2f);
+            Attack();
             Debug.Log("Spider has AWOKEN!!");
         }
     }

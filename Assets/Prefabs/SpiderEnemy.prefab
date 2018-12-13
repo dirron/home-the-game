@@ -176,6 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   directionX: -1
+  ballPrefab: {fileID: 1004145960694988, guid: 02ca8debc7b7f7e4bbe9fd43ec5e542d, type: 2}
 --- !u!212 &212459030303343718
 SpriteRenderer:
   m_ObjectHideFlags: 1
