@@ -19,10 +19,13 @@ public class SpiderEnemy : MonoBehaviour, Enemy {
     public const int LEFT = -1;
     public const int RIGHT = 1;
 
+    private Animator animator;
+
 	// Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;
+        animator = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -49,6 +52,7 @@ public class SpiderEnemy : MonoBehaviour, Enemy {
 
     void Jump()
     {
+        animator.SetBool("IsJumping", true);
         if (rb.velocity.y < 0.01)
         {
             // if stuck on something, turn around
@@ -76,12 +80,17 @@ public class SpiderEnemy : MonoBehaviour, Enemy {
 
     public void ChangeDirection()
     {
+        Vector3 flipX = transform.localScale;
         if (directionX == LEFT)
         {
+            flipX.x = -1;
+            transform.localScale = flipX;
             directionX = RIGHT;
         }
         else
         {
+            flipX.x = 1;
+            transform.localScale = flipX;
             directionX = LEFT;
         }
     }
@@ -93,6 +102,14 @@ public class SpiderEnemy : MonoBehaviour, Enemy {
             awake = true;
             InvokeRepeating("Jump", 2f, 2f);
             Debug.Log("Spider has AWOKEN!!");
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "Ground")
+        {
+            animator.SetBool("IsJumping", false);
         }
     }
 }
