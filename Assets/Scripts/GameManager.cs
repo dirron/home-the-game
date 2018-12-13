@@ -253,6 +253,7 @@ public class GameManager : MonoBehaviour {
         else
         {
             Debug.Log("Game complete");
+            SceneManager.LoadScene(1);
         }
         yield return null;
     }
