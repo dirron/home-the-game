@@ -10,13 +10,11 @@ public class WaspEnemy : MonoBehaviour, Enemy {
 
     private bool awake = false;
     private Vector3 playerPosition;
-    private SpriteRenderer spriteRenderer;
     private bool shouldShoot;
     private float distanceToPlayer;
 
 	// Use this for initialization
 	void Start () {
-        spriteRenderer = GetComponent<SpriteRenderer>();
         shouldShoot = Random.Range(0, 2) == 0;
 	}
 	

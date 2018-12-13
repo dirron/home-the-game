@@ -83,4 +83,9 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
+    public void ResetJump()
+    {
+        jumpCount = 0;
+    }
 }

@@ -7,6 +7,7 @@ public class MainCamera : MonoBehaviour {
 
     public GameObject backgroundSprite;
     public bool verticalOffset;
+    public bool trackPlayer = true;
 
     private GameObject player;
     private Vector3 cameraOffset;
@@ -55,7 +56,10 @@ public class MainCamera : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        Move();
+        if (trackPlayer)
+        {
+            Move();
+        }
     }
 
     void OnPlayerSpawned()
@@ -70,6 +74,10 @@ public class MainCamera : MonoBehaviour {
         if (levelExit.GetComponent<SpriteRenderer>() != null)
         {
             camBoundRight = levelExit.transform.position.x + levelExit.GetComponent<SpriteRenderer>().bounds.size.x / 2;
+        }
+        else if (levelExit.GetComponent<BoxCollider2D>() != null)
+        {
+            camBoundRight = levelExit.transform.position.x + levelExit.GetComponent<BoxCollider2D>().bounds.size.x / 2;
         }
         else if (levelExit.GetComponentInChildren<Tilemap>() != null)
         {

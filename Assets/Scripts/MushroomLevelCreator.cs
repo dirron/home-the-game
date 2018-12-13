@@ -17,6 +17,7 @@ public class MushroomLevelCreator : MonoBehaviour
 
     private float scaleMultiplier;
     private GameObject lastObjectGenerated;
+    private GameObject exitInstance;
 
     // Use this for initialization
     void Start()
@@ -106,10 +107,15 @@ public class MushroomLevelCreator : MonoBehaviour
 
     IEnumerator GenerateExit()
     {
-        Vector3 offset = new Vector3(3f, 0, 0);
-        Instantiate(exit, lastObjectGenerated.transform.position + offset, Quaternion.identity);
+        Vector3 offset;
 
-        Debug.Log("Generated exit");
+        exitInstance = Instantiate(exit, lastObjectGenerated.transform.position, Quaternion.identity);
+        offset = new Vector3(exitInstance.GetComponent<BoxCollider2D>().bounds.size.x / 2 + 5f, 0, 0);
+
+
+        exitInstance.transform.position += offset;
+
+        Debug.Log("Generated exit at " + exitInstance.transform.position);
         LevelEventManager.TriggerEvent("LevelExitCreated");
 
         yield return null;

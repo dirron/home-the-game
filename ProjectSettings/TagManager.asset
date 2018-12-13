@@ -7,10 +7,10 @@ TagManager:
   - Ground
   - LevelExit
   - Enemy
-  - MonsterSpawnPoint
   - Hideable
   - KillTrigger
   - Projectile
+  - MonsterSpawner
   layers:
   - Default
   - TransparentFX

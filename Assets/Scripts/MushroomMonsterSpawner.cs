@@ -11,6 +11,7 @@ public class MushroomMonsterSpawner : MonoBehaviour {
     private float camH;
     private float camW;
     private bool isActive = false;
+    private bool stop = false;
 
     private GameObject player;
 
@@ -24,7 +25,8 @@ public class MushroomMonsterSpawner : MonoBehaviour {
 	void Update () {
         if (player != null
             && player.transform.position.x > playerSpawnPoint.transform.position.x + camW / 2
-            && !isActive)
+            && !isActive
+            && !stop)
         {
             Debug.Log("MonsterSpawner is active!");
             isActive = true;
@@ -37,8 +39,8 @@ public class MushroomMonsterSpawner : MonoBehaviour {
         RaycastHit2D hit;
         Vector2 rayOrigin;
         Vector2 rayDirection = Vector2.down;
-        float spawnDirectionX = Random.Range(0, 2) == 0 ? -1 : 1;
-        float spawnDirectionY = Random.Range(0, 2) == 0 ? -1 : 1;
+        float spawnDirectionX = Random.Range(0, 3) == 0 ? -1 : 1;
+        float spawnDirectionY = Random.Range(0, 3) == 0 ? -1 : 1;
         float maxDistance = camH * 0.7f;
 
         rayOrigin = player.transform.position + new Vector3(camW * spawnDirectionX, camH * spawnDirectionY);
@@ -68,13 +70,31 @@ public class MushroomMonsterSpawner : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
+    public void OnEnterBossArena()
+    {
+        isActive = false;
+        stop = true;
+
+        CancelInvoke();
+
+        foreach (Transform child in entityContainer.transform)
+        {
+            if (child.gameObject.tag == "Enemy")
+            {
+                Destroy(child.gameObject);
+            }
+        }
+    }
+
     void OnEnable()
     {
         LevelEventManager.StartListening("PlayerSpawned", OnPlayerSpawned);
+        LevelEventManager.StartListening("EnteredBossArena", OnEnterBossArena);
     }
 
     void OnDisable()
     {
-        LevelEventManager.StartListening("PlayerSpawned", OnPlayerSpawned);
+        LevelEventManager.StopListening("PlayerSpawned", OnPlayerSpawned);
+        LevelEventManager.StopListening("EnteredBossArena", OnEnterBossArena);
     }
 }
