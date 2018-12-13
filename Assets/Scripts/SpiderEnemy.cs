@@ -48,6 +48,8 @@ public class SpiderEnemy : MonoBehaviour, Enemy {
     {
         Destroy(gameObject);
         Debug.Log("Spider has been murdered");
+
+        LevelEventManager.TriggerEvent("EnemyKilled");
     }
 
     void Jump()

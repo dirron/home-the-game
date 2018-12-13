@@ -48,7 +48,6 @@ public class CordycepsRod : MonoBehaviour, Item {
 
     void Teleport()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
         Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 worldPoint2D = new Vector2(worldPoint.x, worldPoint.y);
 

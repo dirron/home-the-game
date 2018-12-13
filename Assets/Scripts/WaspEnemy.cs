@@ -41,6 +41,8 @@ public class WaspEnemy : MonoBehaviour, Enemy {
     {
         Destroy(gameObject);
         Debug.Log("Wasp has ceased evil activities");
+
+        LevelEventManager.TriggerEvent("EnemyKilled");
     }
 
     public void Awaken(Vector3 position)

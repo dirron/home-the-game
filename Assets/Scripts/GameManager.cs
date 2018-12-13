@@ -114,8 +114,10 @@ public class GameManager : MonoBehaviour {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void PickupItem(Item newItem, int numCharges, bool ignoreCollision = false)
+    public void PickupItem(Item newItem, int numCharges, bool ignoreCollision = false, float duration = 0f)
     {
+        CancelInvoke("DestroyItem");
+
         item = newItem;
         itemCharges = numCharges;
         itemIgnoreCollisionOnMouse = ignoreCollision;
@@ -123,6 +125,11 @@ public class GameManager : MonoBehaviour {
         totalItems++;
         totalItemsText.text = "Total items found " + totalItems;
         currentItemText.text = "Current item: " + newItem.GetName();
+
+        if (duration > 0f)
+        {
+            Invoke("DestroyItem", duration);
+        }
     }
 
     public void UseItem()
@@ -145,11 +152,16 @@ public class GameManager : MonoBehaviour {
 
             if (itemCharges == 0)
             {
-                currentItemText.text = "Current item: n/a";
-                item.Destroy();
-                item = null;
+                DestroyItem();
             }
         }
+    }
+
+    void DestroyItem()
+    {
+        currentItemText.text = "Current item: n/a";
+        item.Destroy();
+        item = null;
     }
 
     void CountEnemyDeath()
