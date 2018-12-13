@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
 
     public float walkSpeed;
+    public float sprintMultiplier = 1.5f;
 
     private SpriteRenderer spriteRenderer;
     private Animator animator;
@@ -52,16 +53,23 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
+        float moveSpeedTotal = walkSpeed;
+        
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            moveSpeedTotal = walkSpeed * sprintMultiplier;
+        }
+
         if (Input.GetKey(KeyCode.D))
         {
             animator.SetBool("IsMoving", true);
-            transform.Translate(Vector2.right * Time.deltaTime * walkSpeed);
+            transform.Translate(Vector2.right * Time.deltaTime * moveSpeedTotal);
             spriteRenderer.flipX = true;
         }
         else if (Input.GetKey(KeyCode.A))
         {
             animator.SetBool("IsMoving", true);
-            transform.Translate(Vector2.left * Time.deltaTime * walkSpeed);
+            transform.Translate(Vector2.left * Time.deltaTime * moveSpeedTotal);
             spriteRenderer.flipX = false;
         }
         else

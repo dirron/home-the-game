@@ -39,8 +39,7 @@ GameObject:
   - component: {fileID: 212280831432634274}
   - component: {fileID: 114583674315294306}
   - component: {fileID: 61631783881418806}
-  - component: {fileID: 50162052003927674}
-  - component: {fileID: 61531705984158024}
+  - component: {fileID: 61785627885074240}
   m_Layer: 12
   m_Name: squirting-beetle_0
   m_TagString: Untagged
@@ -75,51 +74,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50162052003927674
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1611049869601810}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!61 &61531705984158024
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1611049869601810}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.017636657, y: 0.21987066}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5225749, y: 0.060258687}
-    oldSize: {x: 0.78125, y: 0.5}
-    newSize: {x: 0.78125, y: 0.5}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.78125, y: 0.5}
-  m_EdgeRadius: 0
 --- !u!61 &61631783881418806
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -144,6 +98,31 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 1.198608, y: 1.1546792}
+  m_EdgeRadius: 0
+--- !u!61 &61785627885074240
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1611049869601810}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.017636657, y: 0.21987066}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5225749, y: 0.060258687}
+    oldSize: {x: 0.78125, y: 0.5}
+    newSize: {x: 0.78125, y: 0.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.78125, y: 0.5}
   m_EdgeRadius: 0
 --- !u!95 &95941764831384952
 Animator:

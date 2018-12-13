@@ -57,7 +57,7 @@ public class SquirtingBeetle : MonoBehaviour, Item {
             && Input.GetKeyDown(KeyCode.E)
             && Vector3.Distance(player.transform.position, transform.position) < 2f)
         {
-            Debug.Log("Picked up mushroom");
+            Debug.Log("Picked up beetle");
             gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
             gameManager.PickupItem(this, numCharges, true, duration);
 

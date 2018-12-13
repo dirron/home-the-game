@@ -151,12 +151,12 @@ public class ForestLevelCreator : MonoBehaviour {
         float endX = boundaryTilemap.size.x;
         RaycastHit2D hit;
 
-        for (int x = 0; x < endX; x += UnityEngine.Random.Range(5, 20))
+        for (int x = 10; x < endX; x += UnityEngine.Random.Range(5, 20))
         {
             int itemIndex = UnityEngine.Random.Range(0, environment.Length);
             hit = Physics2D.Raycast(new Vector2(x, transform.position.y), Vector2.down);
 
-            if (hit.collider != null)
+            if (hit.collider != null && hit.collider.gameObject.tag != "Player")
             {
                 GameObject environmentObject = Instantiate(environment[itemIndex], 
                     new Vector3(hit.point.x, hit.point.y), Quaternion.identity);
