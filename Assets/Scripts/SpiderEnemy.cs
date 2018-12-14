@@ -74,7 +74,9 @@ public class SpiderEnemy : MonoBehaviour, Enemy {
 
     void Shoot()
     {
-        if (player != null && Vector3.Distance(player.transform.position, transform.position) <= 10)
+        if (player != null 
+            && !player.GetComponent<Animator>().GetBool("IsHiding")
+            && Vector3.Distance(player.transform.position, transform.position) <= 10)
         {
             Vector3 direction = Vector3.Normalize(player.transform.position - transform.position);
             GameObject ball = Instantiate(ballPrefab, transform.position, Quaternion.identity);
